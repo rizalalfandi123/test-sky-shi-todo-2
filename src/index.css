@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .icon {
+    @apply w-[24px] h-[24px];
+  }
+
+  .page-title {
+    @apply text-[36px] font-[700];
+  }
+}
