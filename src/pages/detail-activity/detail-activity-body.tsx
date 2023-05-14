@@ -44,6 +44,8 @@ export const DetailActivityBody: FunctionComponent<IDetailActivityBodyProps> = (
 
   const handleChangeCheckbox = (todo: ITodo) => async (newValue: boolean) => {
     await editTodo({ id: todo.id, is_active: newValue ? 0 : 1 });
+
+    queryClient.invalidateQueries([apiKey.activity, { idActivity }]);
   };
 
   const handleClickButtonEdit = (todo: ITodo) => () => {
@@ -67,7 +69,9 @@ export const DetailActivityBody: FunctionComponent<IDetailActivityBodyProps> = (
   };
 
   if (props.todos.length <= 0) {
-    return <img onClick={handleClickAddTodo} data-cy="todo-empty-state" src="/empty-activity.svg" className="w-[767px] h-[490px]" />;
+    return (
+      <img onClick={handleClickAddTodo} data-cy="todo-empty-state" src="/empty-activity.svg" className="w-[767px] h-[490px]" />
+    );
   }
 
   return (

@@ -1,6 +1,8 @@
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment, ReactNode, useState } from "react";
+import { Fragment, ReactNode, useEffect } from "react";
 import { AscDateSort, AscIcon, CheckIcon, DescDateSort, DescIcon, SortIconButton, SwapIcon } from "@/components/icons";
+import { useParams } from "react-router-dom";
+import { useActivitySort } from "@/utils";
 
 export type TTodoSort = "Terbaru" | "Terlama" | "A - Z" | "Z-A" | "Belum Selesai";
 
@@ -33,7 +35,19 @@ const sortMenus: ISortOption[] = [
 ];
 
 export const ButtonSort = () => {
-  const [selected, setSelected] = useState<TTodoSort>("Terbaru");
+  const { idActivity = "" } = useParams();
+
+  const dataSort = useActivitySort((state) => state.getDataActivitySort(idActivity));
+
+  const changeActivitySort = useActivitySort((state) => state.changeActivitySort);
+
+  const addActivitySort = useActivitySort((state) => state.addNewActivitySort);
+
+  useEffect(() => {
+    if (!dataSort) {
+      addActivitySort(idActivity);
+    }
+  }, []);
 
   return (
     <>
@@ -41,7 +55,7 @@ export const ButtonSort = () => {
         <Menu.Button data-cy="todo-sort-button">
           <SortIconButton className="w-[54px] h-[54px]" />
         </Menu.Button>
-        
+
         <Transition
           as={Fragment}
           enter="transition ease-out duration-100"
@@ -61,14 +75,16 @@ export const ButtonSort = () => {
                   {() => (
                     <button
                       className="flex gap-2 items-center px-4 h-[52px] hover:bg-slate-100"
-                      onClick={() => setSelected(option.label)}
+                      onClick={() => changeActivitySort({ sort: option.label, id: idActivity })}
                       data-cy="sort-selection"
                     >
                       {option.icon}
 
                       {option.label}
 
-                      <div className="grow flex justify-end">{option.label === selected && <CheckIcon className="icon" />}</div>
+                      <div className="grow flex justify-end">
+                        {option.label === dataSort && <CheckIcon className="icon" />}
+                      </div>
                     </button>
                   )}
                 </Menu.Item>
