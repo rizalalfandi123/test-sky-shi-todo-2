@@ -71,6 +71,7 @@ export const Home = () => {
           onClick={handleAddActivity}
           startIcon={<PlusIcon className="icon" />}
           isLoading={loadingCreate}
+          type="submit"
         >
           Tambah
         </Button>
