@@ -5,7 +5,7 @@ import { IActivity, formatDate } from "@/utils";
 interface IActivityCardProps extends ComponentProps<"div"> {
   activity: IActivity;
   onClickDelete: ComponentProps<"button">["onClick"];
-  onClickTitle: ComponentProps<"a">["onClick"];
+  onClickTitle: ComponentProps<"div">["onClick"];
 }
 
 type TActivity = FunctionComponent<IActivityCardProps>;
@@ -15,9 +15,10 @@ export const ActivityCard: TActivity = (props) => {
 
   return (
     <div className="shadow-card p-[25px] h-[234px] flex flex-col rounded-xl" {...divProps}>
-      <a data-cy="activity-item" onClick={onClickTitle} className="font-bold text-[18px] line-clamp-6 grow cursor-pointer">
+      <div data-cy="activity-item" onClick={onClickTitle}>
+        <a className="font-bold text-[18px] line-clamp-6 grow cursor-pointer" data-cy="activity-item-title"></a>
         {activity.title}
-      </a>
+      </div>
 
       <div className="flex justify-between">
         <span data-cy="activity-item-date" className="text-base text-secondary-text">
