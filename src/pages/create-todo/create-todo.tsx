@@ -54,11 +54,11 @@ export const CreateTodo = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full divide-y max-w-[830px] min-h-[403px] flex flex-col transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel as="div" data-cy="modal-add" className="w-full divide-y max-w-[830px] min-h-[403px] flex flex-col transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all">
                   <Dialog.Title as="div" className="relative px-[17px] py-[20px] leading-6 font-semibold">
-                    <h3 className="text-lg">Tambah List Item</h3>
+                    <h3 data-cy="modal-add-title" className="text-lg">Tambah List Item</h3>
 
-                    <button className="absolute right-3 top-3" onClick={closeModal}>
+                    <button data-cy="modal-add-close-button" className="absolute right-3 top-3" onClick={closeModal}>
                       <CloseIcon className="icon" />
                     </button>
                   </Dialog.Title>
@@ -71,6 +71,7 @@ export const CreateTodo = () => {
                       className="w-[150px]"
                       isLoading={isLoading}
                       onClick={handleCreateTodo}
+                      data-cy="modal-add-save-button"
                     >
                       Submit
                     </Button>

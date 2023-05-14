@@ -26,9 +26,10 @@ export const TodoForm = ({ controller }: ITodoFormProps) => {
   return (
     <form className="w-full py-8 px-5 flex flex-col gap-6">
       <label className="block">
-        <span className="font-semibold text-xs">NAMA LIST ITEM</span>
+        <span data-cy="modal-add-name-title" className="font-semibold text-xs">NAMA LIST ITEM</span>
         <input
           type="text"
+          data-cy="modal-add-name-input"
           value={form.title}
           onChange={(e) => setForm((prevValue) => ({ ...prevValue, title: e.target.value }))}
           className="mt-2 block w-full h-[52px] rounded-md border-gray-500 shadow-sm focus:border-primary focus:ring focus:ring-primary"
@@ -36,7 +37,7 @@ export const TodoForm = ({ controller }: ITodoFormProps) => {
       </label>
 
       <div>
-        <span className="font-semibold text-xs">PRIORITY</span>
+        <span data-cy="modal-add-priority-title" className="font-semibold text-xs">PRIORITY</span>
 
         <Listbox
           as="div"
@@ -46,10 +47,11 @@ export const TodoForm = ({ controller }: ITodoFormProps) => {
           <div className="relative mt-2">
             <Listbox.Button
               ref={trigger}
+              data-cy="modal-add-priority-dropdown"
               className="h-[52px] w-full max-w-[225px] flex gap-2 items-center px-2 py-[14px] border rounded-md border-gray-500"
             >
               <DotPriority color={form.priority.color} />
-              <span className="block truncate">{form.priority.label}</span>
+              <span data-cy="modal-add-priority-item" className="block truncate">{form.priority.label}</span>
             </Listbox.Button>
 
             <Transition as="div" leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
@@ -61,6 +63,7 @@ export const TodoForm = ({ controller }: ITodoFormProps) => {
                   {priorityOptions.map((person, personIdx) => (
                     <Listbox.Option
                       key={personIdx}
+                      data-cy="modal-add-priority-item"
                       className={({ active }) =>
                         clsx("relative cursor-default select-none p-[14px]", { ["bg-slate-100"]: active })
                       }

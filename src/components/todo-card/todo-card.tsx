@@ -20,29 +20,31 @@ export const TodoCard: FunctionComponent<ITodoCardProps> = (props) => {
   );
 
   return (
-    <div className="w-full flex shadow-card p-[30px] rounded-xl">
+    <div data-cy="todo-item" className="w-full flex shadow-card p-[30px] rounded-xl">
       <div className="flex grow gap-3 items-center">
         <input
-          id="default-checkbox"
+          data-cy="todo-item-checkbox"
           type="checkbox"
           checked={check}
           onChange={(e) => {
             setCheck(e.target.checked);
-            onChangeCheckbox(e.target.checked)
+            onChangeCheckbox(e.target.checked);
           }}
           className="w-6 h-6 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary"
         />
 
-        <DotPriority color={priorityColor} />
+        <DotPriority data-cy="todo-item-priority-indicator" color={priorityColor} />
 
-        <p className="text-lg font-medium">{todo.title}</p>
+        <p data-cy="todo-item-title" className="text-lg font-medium">
+          {todo.title}
+        </p>
 
-        <button onClick={onClickButtonEdit}>
+        <button data-cy="todo-item-edit-button" onClick={onClickButtonEdit}>
           <EditIcon className="icon" />
         </button>
       </div>
 
-      <button onClick={onClickButtonDelete}>
+      <button data-cy="todo-item-delete-button" onClick={onClickButtonDelete}>
         <TrashIcon />
       </button>
     </div>
